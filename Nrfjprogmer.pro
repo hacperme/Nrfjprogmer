@@ -34,3 +34,6 @@ HEADERS += \
 FORMS += \
     UI/mainwindow.ui
 
+DISTFILES += \
+    Doc/design.md
+
