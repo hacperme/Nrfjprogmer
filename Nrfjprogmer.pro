@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    UI/mainwindow.cpp
+    UI/mainwindow.cpp \
+    API/api.cpp
 
 HEADERS += \
-    UI/mainwindow.h
+    UI/mainwindow.h \
+    API/api.h
 
 
 FORMS += \
@@ -36,4 +38,7 @@ FORMS += \
 
 DISTFILES += \
     Doc/design.md
+
+#INCLUDEPATH += Libs/include
+#LIBS += Libs/nrfjprog.dll
 
