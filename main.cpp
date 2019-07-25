@@ -6,18 +6,19 @@
 #include "UI/mainwindow.h"
 #include "Tests/test.h"
 
-
+//#define RUN_TEST
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
+    MainWindow w;
+    w.show();
 
-
+#ifdef RUN_TEST
     test_all();
+#endif
 
-    return 0;//a.exec();
+    return a.exec();
 }
 
 

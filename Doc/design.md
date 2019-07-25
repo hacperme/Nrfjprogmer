@@ -16,6 +16,10 @@
 
 - 配置文件 ini 文件解析对象
 
+    1. ini 文件的语法解析
+    2. 实现解析器类
+    3. 文件的读取，保存
+
 - 发布 打包
 
 ## nrfjprog 命令行 操作 指令
@@ -39,4 +43,23 @@
 - 擦除 flash
 
 > nrfjprog -e
+
+- 写指定地址内存
+
+> C:\Users\DELL>nrfjprog --memwr 0x00008790  --val 0x12345678 --verify
+Parsing parameters.
+Writing.
+Verified OK.
+
+- 读指定地址内存
+
+>
+C:\Users\DELL>nrfjprog --memrd 0x00008790 -f UNKNOWN --n 16
+0x00008790: 12345678 FFFFFFFF FFFFFFFF FFFFFFFF   |xV4.............|
+
+- 擦除 指定页
+
+> C:\Users\DELL>nrfjprog --erasepage  0x2000-0x8000
+Erasing addresses 0x2000 to 0x7FFF.
+
 
