@@ -91,7 +91,7 @@ static void test_api_readcode(API &api){
 static void test_api_setpath(API &api){
     api.nrfjprog_set_path("C:\\Program Files (x86)\\Nordic Semiconductor\\nrf-command-line-tools\\bin\\nrfjprog.exe");
     QString s;
-    EXPECT_EQ_INT(0, api.nrfjprog_ids(s));
+    EXPECT_EQ_INT(Success, api.nrfjprog_ids(s));
 }
 
 

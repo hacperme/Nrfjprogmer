@@ -1,11 +1,22 @@
 #include "api.h"
 
+
+/**
+ * @brief API::API
+ * API 构造函数
+ * @param parent
+ */
 API::API(QObject *parent) : QObject(parent)
 {
     nrfjprog_path = find_nrf_path();
 
 }
 
+/**
+ * @brief API::nrfjprog_set_path
+ * 设置 nrfjprog 程序的绝对路径
+ * @param path  nrfjprog 程序的绝对路径
+ */
 void API::nrfjprog_set_path(QString path)
 {
     nrfjprog_path = path;
@@ -13,7 +24,8 @@ void API::nrfjprog_set_path(QString path)
 
 /**
  * @brief API::get_nrf_path
- * @return
+ * 读取当前 nrfjprog 程序的绝对路径
+ * @return  nrfjprog 程序的绝对路径
  */
 QString API::get_nrf_path()
 {
@@ -22,7 +34,10 @@ QString API::get_nrf_path()
 
 /**
  * @brief API::nrfjprog_recover
- * @param family
+ * Erases all user flash memory and disables the readback
+ * protection mechanism if enabled.
+ * @param Selects the device family for the operation.
+ * family Valid argument options are NRF51, NRF52, and UNKNOWN.
  * @return
  */
 int API::nrfjprog_recover(QString family)
@@ -40,7 +55,7 @@ int API::nrfjprog_recover(QString family)
 /**
  * @brief API::nrfjprog_reset
  * Performs a soft reset by setting the SysResetReq bit of
- *the AIRCR register of the core.
+ * the AIRCR register of the core.
  *
  * @param family
  * @return
@@ -98,13 +113,14 @@ int API::nrfjprog_program(QString hex, bool verify, bool reset, bool sectorerase
     return ret;
 }
 
+
 /**
  * @brief API::nrfjprog_eraseall
- * @param family
+ * Erases all user available program flash memory and the UICR page.
  * @param qspieraseall
+ * @param family
  * @return
  */
-
 int API::nrfjprog_eraseall(bool qspieraseall, QString family)
 {
     int ret;
@@ -120,10 +136,15 @@ int API::nrfjprog_eraseall(bool qspieraseall, QString family)
 
 /**
  * @brief API::nrfjprog_memwr
+ * Writes to the provided address in memory with help of
+ * the NVM Controller or, if your device is equipped with
+ * a QSPI peripheral and the address to write belongs to
+ * the XIP region, with the help of the QSPI peripheral to
+ * an external memory device.
  * @param addr
  * @param value
- * @param family
  * @param verify
+ * @param family
  * @return
  */
 int API::nrfjprog_memwr(QString addr, QString value,bool verify, QString family)
@@ -141,6 +162,13 @@ int API::nrfjprog_memwr(QString addr, QString value,bool verify, QString family)
 
 /**
  * @brief API::nrfjprog_memrd
+ * Reads n bytes from the provided address. If width is
+ * not given, 32-bit words are read if addr is word aligned,
+ * 16-bit words if addr is half word aligned, and 8-bitwords otherwise.
+ * If n is not given, one word of size width is read.
+ * The address and n must be aligned to the width parameter.
+ * The maximum number of bytesthat can be read is 1 MB.
+ * The width must be 8, 16, or 32.
  * @param addr
  * @param bytes
  * @param family
@@ -161,6 +189,7 @@ int API::nrfjprog_memrd(QString addr, QString bytes, QString family)
 
 /**
  * @brief API::nrfjprog_eraseuicr
+ * Erases the UICR page.
  * @param family
  * @return
  */
@@ -175,6 +204,16 @@ int API::nrfjprog_eraseuicr(QString family)
     return ret;
 }
 
+/**
+ * @brief API::nrfjprog_erasepage
+ * Erases the flash pages starting at the given start address
+ * and ending at the given end address (not included in the erase).
+ *  If no end address is given, only one flash page will be erased.
+ * @param addr_start
+ * @param addr_end
+ * @param family
+ * @return
+ */
 int API::nrfjprog_erasepage(QString addr_start, QString addr_end, QString family)
 {
     int ret;
@@ -186,6 +225,14 @@ int API::nrfjprog_erasepage(QString addr_start, QString addr_end, QString family
     return ret;
 }
 
+/**
+ * @brief API::nrfjprog_rbp
+ * Enables the readback protection mechanism.
+ * Valid argument options are CR0 and ALL.
+ * @param level
+ * @param family
+ * @return
+ */
 int API::nrfjprog_rbp(QString level, QString family)
 {
     int ret;
@@ -197,6 +244,14 @@ int API::nrfjprog_rbp(QString level, QString family)
     return ret;
 }
 
+/**
+ * @brief API::nrfjprog_ids
+ * Displays the serial numbers of all the debuggers
+ * connected to the computer.
+ * @param serial_id
+ * @param family
+ * @return
+ */
 int API::nrfjprog_ids(QString &serial_id ,QString family)
 {
     int ret;
@@ -209,6 +264,17 @@ int API::nrfjprog_ids(QString &serial_id ,QString family)
     return ret;
 }
 
+/**
+ * @brief API::nrfjprog_readcode
+ * Reads the device flash
+ * and stores it in the given file path.
+ * @param path
+ * @param readuicr
+ * @param readram
+ * @param readqspi
+ * @param family
+ * @return
+ */
 int API::nrfjprog_readcode(QString path, bool readuicr,
                            bool readram, bool readqspi, QString family)
 {
@@ -230,7 +296,11 @@ int API::nrfjprog_readcode(QString path, bool readuicr,
 
 
 
-
+/**
+ * @brief API::find_nrf_path
+ * 调用 cmd 命令查找 nrfjprog 安装位置
+ * @return
+ */
 QString API::find_nrf_path()
 {
     QString program = "cmd";
@@ -247,7 +317,13 @@ QString API::find_nrf_path()
 }
 
 
-
+/**
+ * @brief API::run_command
+ * 创建新进程 执行 程序
+ * @param cmd   程序路径
+ * @param arg   命令行参数
+ * @return
+ */
 int API::run_command(QString cmd, QStringList arg)
 {
     QProcess *p = new QProcess(0);
@@ -261,9 +337,41 @@ int API::run_command(QString cmd, QStringList arg)
     logs = QString::fromLocal8Bit(p->readAllStandardOutput());
     emit logs_is_ready();
     p->close();
+    handle_error(ret);
     qDebug()<<"run_comm ret code:"<<cmd<<ret;
     return ret;
 
+}
+
+/**
+ * @brief API::handle_error
+ * 处理 nrfjprog 运行的错误
+ * @param error_no
+ */
+void API::handle_error(int error_no)
+{
+    QString title;
+    QString message;
+//    qDebug()<<NoLogWarning;
+    switch (error_no) {
+    case NoDebuggersError:
+        title = "NoDebuggersError";
+        message = "There are no debuggers connected to the PC.";
+        break;
+    case -1:
+        title = "出错了";
+        message = "不能启动 Nrfjprog 程序";
+        break;
+    case VerifyError:
+        title = "VerifyError";
+        message = "The write verify operation failed.";
+        break;
+    default:
+        break;
+    }
+
+    if(error_no != 0)
+        QMessageBox::critical(0, title, message);
 }
 
 

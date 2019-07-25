@@ -29,6 +29,7 @@ void MainWindow::update_logs()
 {
 //    ui->show_logs->setText(api->logs);
     ui->show_logs->append(api->logs);
+    api->logs = "";
 }
 
 
@@ -87,6 +88,5 @@ void MainWindow::on_button_readback_clicked()
     include_qspi = ui->include_qspi->isChecked();
 
     api->nrfjprog_readcode(save_path, include_icr, include_ram, include_qspi);
-
 
 }

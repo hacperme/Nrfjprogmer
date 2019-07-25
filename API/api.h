@@ -6,6 +6,66 @@
 #include <QStringList>
 #include <QProcess>
 #include <QDebug>
+#include <QMessageBox>
+
+
+typedef enum {
+    Success = 0,
+    NrfjprogError = 1,
+    NrfjprogOutdatedError = 2,
+    MemoryAllocationError = 3,
+    InvalidArgumentError = 11,
+    InsufficientArgumentsError = 12,
+    IncompatibleArgumentsError = 13,
+    DuplicatedArgumentsError =14,
+    NoOperationError = 15,
+    UnavailableOperationBecauseProtectionError = 16,
+    UnavailableOperationInFamilyError = 17,
+    WrongFamilyForDeviceError = 18,
+    UnavailableOperationBecauseMpuConfiguration = 19,
+    NrfjprogDllNotFoundError = 20,
+    NrfjprogDllLoadFailedError = 21,
+    NrfjprogDllFunctionLoadFailedError = 22,
+    NrfjprogDllNotImplementedError = 23,
+    NrfjprogIniNotFoundError = 25,
+    NrfjprogIniCannotBeOpenedError = 26,
+    NrfjprogIniFamilyMissingError = 27,
+    NrfjprogIniClockspeedMissingError = 28,
+    NrfjprogIniQspiIniFileMissingError = 29,
+    JLinkARMDllNotFoundError = 30,
+    JLinkARMDllInvalidError = 31,
+    JLinkARMDllFailedToOpenError = 32,
+    JLinkARMDllError = 33,
+    JLinkARMDllTooOldError = 34,
+    InvalidSerialNumberError = 40,
+    NoDebuggersError,
+    NotPossibleToConnectError,
+    LowVoltageError,
+    FileNotFoundError = 51,
+    InvalidHexFileError,
+    FicrReadError,
+    WrongArgumentError,
+    VerifyError,
+    NoWritePermissionError,
+    NVMCOperationError,
+    FlashNotErasedError,
+    RamIsOffError,
+    NoReadPermissionError,
+    NoExternalMemoryConfiguredError,
+    RecoverFailed = 62,
+    NrfjprogQspiIniNotFoundError = 70,
+    NrfjprogQspiIniCannotBeOpenedError,
+    NrfjprogQspiSyntaxError,
+    NrfjprogQspiIniParsingError,
+    FicrOperationWarning = 100,
+    UnalignedPageEraseWarning,
+    NoLogWarning,
+    UicrWriteOperationWithoutEraseWarning,
+    VeryLongOperationWarning = 104,
+    CanNotExecNrfjprog = -1     ///自定义返回值，不能执行程序Nrfjprog
+}ErrorCode;
+
+
 
 
 class API : public QObject
@@ -59,6 +119,7 @@ private:
     QString find_nrf_path(void);
     int run_command(QString cmd, QStringList arg);
     QString nrfjprog_path;
+    void handle_error(int error_no);
 
 };
 
