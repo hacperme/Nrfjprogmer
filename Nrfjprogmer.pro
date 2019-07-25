@@ -26,18 +26,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     UI/mainwindow.cpp \
-    API/api.cpp
+    API/api.cpp \
+    Tests/test.cpp
 
 HEADERS += \
     UI/mainwindow.h \
-    API/api.h
+    API/api.h \
+    Tests/test.h
 
 
 FORMS += \
     UI/mainwindow.ui
 
 DISTFILES += \
-    Doc/design.md
+    Doc/design.md \
+    Tests/test_ALL.hex
 
 #INCLUDEPATH += Libs/include
 #LIBS += Libs/nrfjprog.dll
