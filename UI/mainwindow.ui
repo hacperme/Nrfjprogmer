@@ -84,7 +84,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="download">
+        <widget class="QPushButton" name="program">
          <property name="text">
           <string>烧写</string>
          </property>
@@ -119,7 +119,7 @@
         </widget>
        </item>
        <item row="2" column="1" colspan="2">
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="eraseall">
          <property name="text">
           <string>擦除</string>
          </property>
@@ -132,28 +132,28 @@
        <item>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
-          <widget class="QCheckBox" name="checkBox">
+          <widget class="QCheckBox" name="include_ram">
            <property name="text">
             <string>Include RAM</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QCheckBox" name="checkBox_2">
+          <widget class="QCheckBox" name="include_icr">
            <property name="text">
             <string>Include ICR</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="button_readback">
            <property name="text">
             <string>回读</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QCheckBox" name="checkBox_3">
+          <widget class="QCheckBox" name="include_qspi">
            <property name="text">
             <string>Include QSPI</string>
            </property>

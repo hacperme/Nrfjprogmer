@@ -24,15 +24,15 @@ public:
 
     int nrfjprog_reset(QString family="UNKNOWN");
 
-    int nrfjprog_program(QString hex, QString family="UNKNOWN", bool verify=false,
+    int nrfjprog_program(QString hex, bool verify=false,
                          bool reset=false, bool sectorerase=false,
                          bool sectoranduicrerase=false, bool chiperase=false,
-                         bool qspichiperase=false, bool qspisectorerase=false);
+                         bool qspichiperase=false, bool qspisectorerase=false,
+                         QString family="UNKNOWN");
 
-    int nrfjprog_eraseall(QString family="UNKNOWN", bool qspieraseall=false);
+    int nrfjprog_eraseall(bool qspieraseall=false, QString family="UNKNOWN");
 
-    int nrfjprog_memwr(QString addr, QString value,
-                       QString family="UNKNOWN", bool verify=true);
+    int nrfjprog_memwr(QString addr, QString value, bool verify=true,QString family="UNKNOWN");
 
     int nrfjprog_memrd(QString addr, QString bytes="16", QString family="UNKNOWN");
 
@@ -44,8 +44,8 @@ public:
 
     int nrfjprog_ids(QString &serial_id, QString family="UNKNOWN");
 
-    int nrfjprog_readcode(QString path, QString family="UNKNOWN", bool readuicr=false,
-            bool readram=false, bool readqspi=false);
+    int nrfjprog_readcode(QString path, bool readuicr=false, bool readram=false,
+                          bool readqspi=false, QString family="UNKNOWN");
 
 
 

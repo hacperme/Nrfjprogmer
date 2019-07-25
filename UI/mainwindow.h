@@ -27,12 +27,17 @@ private slots:
 
     void on_button_disable_rbp_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_eraseall_clicked();
+
+    void on_program_clicked();
+
+    void on_button_readback_clicked();
 
 private:
     Ui::MainWindow *ui;
 
     API *api;
+    QString hex_path;
 
 };
 

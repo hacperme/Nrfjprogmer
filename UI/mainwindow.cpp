@@ -35,19 +35,58 @@ void MainWindow::update_logs()
 
 void MainWindow::on_button_open_file_clicked()
 {
-    QString path = QFileDialog::getOpenFileName(this,tr("打开文件"), ".",
+    hex_path = QFileDialog::getOpenFileName(this,tr("打开文件"), ".",
                                                 tr("HEX files (*.hex)"));
-    ui->show_file_path->setText(path);
+    ui->show_file_path->setText(hex_path);
 //    qDebug()<<path;
 }
 
 
 void MainWindow::on_button_disable_rbp_clicked()
 {
+    qDebug()<<"into on_button_disable_rbp_clicked() ";
+
     api->nrfjprog_recover();
 }
 
-void MainWindow::on_pushButton_2_clicked()
+
+void MainWindow::on_eraseall_clicked()
 {
+    qDebug()<<"into on_eraseall_clicked() ";
     api->nrfjprog_eraseall();
+}
+
+void MainWindow::on_program_clicked()
+{
+    qDebug()<<"into on_program_clicked ";
+    bool verify;
+    bool reset;
+    verify = ui->is_verify->isChecked();
+    reset = ui->is_reset->isChecked();
+    api->nrfjprog_recover();
+    api->nrfjprog_program(hex_path, verify, reset);
+    if(ui->is_rbp->isChecked())
+        //这里可能需要延时，等待固件烧写完成再操作。
+        api->nrfjprog_rbp();
+}
+
+
+
+void MainWindow::on_button_readback_clicked()
+{
+    QString save_path;
+    bool include_ram;
+    bool include_qspi;
+    bool include_icr;
+
+    save_path = QFileDialog::getSaveFileName(this,tr("保存文件"), ".",
+                                             tr("HEX files (*.hex)"));
+
+    include_ram = ui->include_ram->isChecked();
+    include_icr = ui->include_icr->isChecked();
+    include_qspi = ui->include_qspi->isChecked();
+
+    api->nrfjprog_readcode(save_path, include_icr, include_ram, include_qspi);
+
+
 }

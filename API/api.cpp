@@ -69,10 +69,9 @@ int API::nrfjprog_reset(QString family)
  * @param qspisectorerase
  * @return
  */
-int API::nrfjprog_program(QString hex, QString family, bool verify,
-                          bool reset, bool sectorerase,
+int API::nrfjprog_program(QString hex, bool verify, bool reset, bool sectorerase,
                           bool sectoranduicrerase, bool chiperase,
-                          bool qspichiperase, bool qspisectorerase)
+                          bool qspichiperase, bool qspisectorerase, QString family)
 {
     int ret;
 //    QString output;
@@ -106,7 +105,7 @@ int API::nrfjprog_program(QString hex, QString family, bool verify,
  * @return
  */
 
-int API::nrfjprog_eraseall(QString family, bool qspieraseall)
+int API::nrfjprog_eraseall(bool qspieraseall, QString family)
 {
     int ret;
 //    QString output;
@@ -127,7 +126,7 @@ int API::nrfjprog_eraseall(QString family, bool qspieraseall)
  * @param verify
  * @return
  */
-int API::nrfjprog_memwr(QString addr, QString value, QString family, bool verify)
+int API::nrfjprog_memwr(QString addr, QString value,bool verify, QString family)
 {
     int ret;
 //    QString output;
@@ -210,8 +209,8 @@ int API::nrfjprog_ids(QString &serial_id ,QString family)
     return ret;
 }
 
-int API::nrfjprog_readcode(QString path, QString family,
-                           bool readuicr, bool readram, bool readqspi)
+int API::nrfjprog_readcode(QString path, bool readuicr,
+                           bool readram, bool readqspi, QString family)
 {
     int ret;
 //    QString output;
@@ -262,6 +261,7 @@ int API::run_command(QString cmd, QStringList arg)
     logs = QString::fromLocal8Bit(p->readAllStandardOutput());
     emit logs_is_ready();
     p->close();
+    qDebug()<<"run_comm ret code:"<<cmd<<ret;
     return ret;
 
 }
