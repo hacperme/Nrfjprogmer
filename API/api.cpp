@@ -260,12 +260,20 @@ int API::nrfjprog_rbp(QString level, QString family)
 int API::nrfjprog_ids(QString &serial_id ,QString family)
 {
     int ret;
-//    QString output;
     QStringList args;
+    QProcess pro;
+    QString output;
     args << "--ids" << "-f" << family;
-    ret = run_command(nrfjprog_path, args);
-    serial_id =logs;
-//    qDebug()<<serial_id<<ret;
+    pro.start(nrfjprog_path, args);
+    pro.waitForFinished(-1);
+    ret = pro.exitCode();
+//    if(ret == 0)
+    output = pro.readAllStandardOutput();
+    if(output == "")
+        serial_id = "设备未连接\n";
+    else
+        serial_id = output;
+    handle_error(ret);
     return ret;
 }
 
@@ -332,21 +340,9 @@ QString API::find_nrf_path()
  */
 int API::run_command(QString cmd, QStringList arg)
 {
-//    QProcess *p = new QProcess(this);
     int ret;
 
-//    QObject::connect(p,SIGNAL(readyReadStandardOutput()), this, SLOT(update_info_logs()));
-
-//    QObject::connect(p,SIGNAL(readyReadStandardError()), this, SLOT(update_error_logs()));
-
-    p->start(cmd, arg);
-    if(!p->waitForStarted(-1))
-        return -1;
-//    p->waitForReadyRead();
-    while (!p->waitForFinished(3000)) {
-        QApplication::processEvents();
-    }
-    ret = p->exitCode();
+#if 0
     if(ret == 0){
         logs = QString::fromLocal8Bit(p->readAllStandardOutput());
     }
@@ -355,9 +351,31 @@ int API::run_command(QString cmd, QStringList arg)
     }
 
     emit logs_is_ready();
+#endif
+
+
+#ifdef RUN_TEST
+    p->start(cmd, arg);
+    p->waitForFinished();
+    ret = p->exitCode();
+    logs = QString::fromLocal8Bit(p->readAll());
+    qDebug()<<"run_comm ret code:"<<cmd<<ret<<logs;
+#else
+    QObject::connect(p,SIGNAL(readyReadStandardOutput()), this, SLOT(update_info_logs()));
+
+    QObject::connect(p,SIGNAL(readyReadStandardError()), this, SLOT(update_error_logs()));
+
+    p->start(cmd, arg);
+    while (!p->waitForFinished(3000)) {
+        QApplication::processEvents();
+    }
+    ret = p->exitCode();
+
+#endif
+
     p->close();
     handle_error(ret);
-    qDebug()<<"run_comm ret code:"<<cmd<<ret;
+
     return ret;
 }
 
@@ -405,27 +423,45 @@ void API::handle_error(int error_no)
         break;
     }
 
+#ifndef RUN_TEST
+
     if(error_no != 0)
         QMessageBox::critical(0, title, message);
+
+#endif
+
 }
 
 
 
-//void API::update_error_logs()
-//{
 
-//    logs = "1234";
-//    emit logs_is_ready();
-//}
+#if 1
+void API::update_info_logs()
+{
+    QString temp;
+    temp = QString::fromLocal8Bit(p->readAllStandardOutput());
+    if(temp != ""){
+        logs = temp;
+        emit logs_is_ready();
+    }
 
-//void API::update_info_logs()
-//{
 
-//    logs ="tessssst"; //QString::fromLocal8Bit(p->readAllStandardError());
-//    emit logs_is_ready();
+}
 
-//}
 
+void API::update_error_logs()
+{
+    QString temp;
+    temp = QString::fromLocal8Bit(p->readAllStandardError());
+    if(temp != ""){
+        logs = temp;
+        emit logs_is_ready();
+    }
+}
+
+
+
+#endif
 
 
 

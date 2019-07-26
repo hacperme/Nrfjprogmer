@@ -14,154 +14,171 @@
    <string>下载工具</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QSplitter" name="splitter">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>20</y>
-      <width>430</width>
-      <height>277</height>
+      <x>20</x>
+      <y>5</y>
+      <width>511</width>
+      <height>302</height>
      </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-    <widget class="QWidget" name="layoutWidget">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QPushButton" name="button_open_file">
-          <property name="text">
-           <string>打开文件</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1" colspan="3">
-         <widget class="QLineEdit" name="show_file_path">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="inputMethodHints">
-           <set>Qt::ImhLatinOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="text">
-           <string>打开文件路径</string>
-          </property>
-          <property name="maxLength">
-           <number>32767</number>
-          </property>
-          <property name="placeholderText">
-           <string/>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="program">
-          <property name="text">
-           <string>烧写</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QCheckBox" name="is_verify">
-          <property name="text">
-           <string>验证</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QCheckBox" name="is_reset">
-          <property name="text">
-           <string>复位</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QCheckBox" name="is_rbp">
-          <property name="text">
-           <string>锁定</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="button_disable_rbp">
-          <property name="text">
-           <string>解锁</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1" colspan="2">
-         <widget class="QPushButton" name="eraseall">
-          <property name="text">
-           <string>擦除</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="include_icr">
-            <property name="text">
-             <string>Include ICR</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QCheckBox" name="include_qspi">
-            <property name="text">
-             <string>Include QSPI</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="button_readback">
-            <property name="text">
-             <string>回读</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="include_ram">
-            <property name="text">
-             <string>Include RAM</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QTextEdit" name="show_logs">
-     <property name="inputMethodHints">
-      <set>Qt::ImhLatinOnly|Qt::ImhMultiLine</set>
-     </property>
-     <property name="documentTitle">
-      <string/>
-     </property>
-     <property name="undoRedoEnabled">
-      <bool>false</bool>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-     <property name="acceptRichText">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0" rowspan="2">
+        <widget class="QPushButton" name="button_scan">
+         <property name="text">
+          <string>扫描</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="button_open_file">
+         <property name="text">
+          <string>打开文件</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="3">
+        <widget class="QLineEdit" name="show_file_path">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhLatinOnly</set>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string>打开文件路径</string>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="placeholderText">
+          <string/>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="program">
+         <property name="text">
+          <string>烧写</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="is_verify">
+         <property name="text">
+          <string>验证</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QCheckBox" name="is_reset">
+         <property name="text">
+          <string>复位</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QCheckBox" name="is_rbp">
+         <property name="text">
+          <string>锁定</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="include_icr">
+           <property name="text">
+            <string>Include ICR</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="include_ram">
+           <property name="text">
+            <string>Include RAM</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="button_readback">
+           <property name="text">
+            <string>回读</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="include_qspi">
+           <property name="text">
+            <string>Include QSPI</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="eraseall">
+           <property name="text">
+            <string>擦除</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="button_disable_rbp">
+           <property name="text">
+            <string>解锁</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QTextEdit" name="show_logs">
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhLatinOnly|Qt::ImhMultiLine</set>
+       </property>
+       <property name="documentTitle">
+        <string/>
+       </property>
+       <property name="undoRedoEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="acceptRichText">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
+   <zorder>splitter</zorder>
+   <zorder>button_scan</zorder>
+   <zorder>button_disable_rbp</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

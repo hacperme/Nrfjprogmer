@@ -9,6 +9,8 @@
 #include <QMessageBox>
 
 
+#define RUN_TEST
+
 typedef enum {
     Success = 0,
     NrfjprogError = 1,
@@ -126,9 +128,11 @@ private:
     QProcess *p;
 
 private slots:
-//    void update_error_logs();
-//    void update_info_logs();
 
+#if 1
+    void update_error_logs();
+    void update_info_logs();
+#endif
 
 };
 

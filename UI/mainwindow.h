@@ -36,6 +36,8 @@ private slots:
 
     void on_show_logs_textChanged();
 
+    void on_button_scan_clicked();
+
 private:
     Ui::MainWindow *ui;
 

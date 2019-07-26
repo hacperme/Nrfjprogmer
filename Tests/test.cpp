@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 #include "../API/api.h"
 #include "test.h"
 
-//static int main_ret = 0;
+
 static int test_count = 0;
 static int test_pass = 0;
 
@@ -36,60 +37,60 @@ static int test_pass = 0;
 
 
 static void test_api_recover(API &api){
-    EXPECT_EQ_INT(0, api.nrfjprog_recover());
+    EXPECT_EQ_INT(Success, api.nrfjprog_recover());
 }
 
 
 static void test_api_eraseall(API &api){
-    EXPECT_EQ_INT(0, api.nrfjprog_eraseall());
+    EXPECT_EQ_INT(Success, api.nrfjprog_eraseall());
 }
 
 
 static void test_api_reset(API &api){
-    EXPECT_EQ_INT(0, api.nrfjprog_reset());
+    EXPECT_EQ_INT(Success, api.nrfjprog_reset());
 }
 
 
 static void test_api_program(API &api){
-    EXPECT_EQ_INT(0, api.nrfjprog_program("D:\\Workspace\\QT\\Nrfjprogmer\\Tests\\test_ALL.hex"));
+    EXPECT_EQ_INT(Success, api.nrfjprog_program("../Tests\\test_ALL.hex"));
 }
 
 
 static void test_api_memwr(API &api){
     api.nrfjprog_recover();
-    EXPECT_EQ_INT(0, api.nrfjprog_memwr("0x00008790", "0x12345678"));
+    EXPECT_EQ_INT(Success, api.nrfjprog_memwr("0x00008790", "0x12345678"));
 }
 
 static void test_api_memrd(API &api){
 
-    EXPECT_EQ_INT(0, api.nrfjprog_memrd("0x00008790"));
+    EXPECT_EQ_INT(Success, api.nrfjprog_memrd("0x00008790"));
 }
 
 static void test_api_eraseuicr(API &api){
 
-    EXPECT_EQ_INT(0, api.nrfjprog_eraseuicr());
+    EXPECT_EQ_INT(Success, api.nrfjprog_eraseuicr());
 }
 
 static void test_api_erasepage(API &api){
-    EXPECT_EQ_INT(0, api.nrfjprog_erasepage("0x2000", "0x8000"));
+    EXPECT_EQ_INT(Success, api.nrfjprog_erasepage("0x2000", "0x8000"));
 }
 
 static void test_api_rbp(API &api){
-    EXPECT_EQ_INT(0, api.nrfjprog_rbp() && (api.nrfjprog_eraseall() != 0));
+    EXPECT_EQ_INT(Success, api.nrfjprog_rbp() && (api.nrfjprog_eraseall() != 0));
 }
 
 static void test_api_ids(API &api){
     QString ids;
-    EXPECT_EQ_INT(0, api.nrfjprog_ids(ids));
+    EXPECT_EQ_INT(Success, api.nrfjprog_ids(ids));
 }
 
 
 static void test_api_readcode(API &api){
-    EXPECT_EQ_INT(0, api.nrfjprog_readcode("D:\\Workspace\\QT\\Nrfjprogmer\\Tests\\test_readback.hex"));
+    EXPECT_EQ_INT(Success, api.nrfjprog_readcode("../Tests\\test_readback.hex"));
 }
 
 static void test_api_setpath(API &api){
-    api.nrfjprog_set_path("C:\\Program Files (x86)\\Nordic Semiconductor\\nrf-command-line-tools\\bin\\nrfjprog.exe");
+    api.nrfjprog_set_path("C:\\Program Files (x86)\\Nordic Semiconductor\\nrf5x\\bin\\nrfjprog.exe");
     QString s;
     EXPECT_EQ_INT(Success, api.nrfjprog_ids(s));
 }
@@ -97,7 +98,7 @@ static void test_api_setpath(API &api){
 
 static void test_api(void){
     API api;
-    qDebug()<<api.get_nrf_path();
+
     test_api_setpath(api);
 
     test_api_recover(api);
@@ -108,6 +109,9 @@ static void test_api(void){
     test_api_erasepage(api);
     test_api_eraseall(api);
     test_api_program(api);
+
+    Sleep(3000);
+
     test_api_readcode(api);
 
 

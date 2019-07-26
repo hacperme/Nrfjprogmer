@@ -11,17 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
     api = new API;
-    QString ids, nrf_path;
-    api->nrfjprog_ids(ids);
-    nrf_path = api->get_nrf_path();
-    ui->show_logs->setText("已连接调试器:"+ids+"\nnrfjprog路径:"+nrf_path+"\n");
-
     QObject::connect(api, SIGNAL(logs_is_ready()), this, SLOT(update_logs()));
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -35,9 +26,9 @@ MainWindow::~MainWindow()
  */
 void MainWindow::update_logs()
 {
-//    ui->show_logs->setText(api->logs);
+
     ui->show_logs->append(api->logs);
-    api->logs = "";
+//    api->logs = "";
 }
 
 
@@ -108,4 +99,13 @@ void MainWindow::on_button_readback_clicked()
 void MainWindow::on_show_logs_textChanged()
 {
     ui->show_logs->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+}
+
+void MainWindow::on_button_scan_clicked()
+{
+    QString ids, nrf_path;
+    api->nrfjprog_ids(ids);
+    nrf_path = api->get_nrf_path();
+    ui->show_logs->append("调试器:"+ids+"nrfjprog路径:"+nrf_path+"\n");
+
 }

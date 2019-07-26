@@ -8,19 +8,23 @@
 #include "Tests/test.h"
 
 
-//#define RUN_TEST
+
 
 int main(int argc, char *argv[])
-{
+{   
+
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
 
 #ifdef RUN_TEST
     test_all();
+#else
+
+    MainWindow w;
+    w.show();
+    return a.exec();
 #endif
 
-    return a.exec();
+    return 0;
 }
 
 
