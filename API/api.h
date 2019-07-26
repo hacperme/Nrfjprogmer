@@ -109,10 +109,13 @@ public:
 
 
 
+
+
 signals:
     void logs_is_ready(void);
 
 public slots:
+
 
 private:
 
@@ -120,6 +123,12 @@ private:
     int run_command(QString cmd, QStringList arg);
     QString nrfjprog_path;
     void handle_error(int error_no);
+    QProcess *p;
+
+private slots:
+//    void update_error_logs();
+//    void update_info_logs();
+
 
 };
 

@@ -2,9 +2,11 @@
 #include <QProcess>
 #include <QDebug>
 
+
 #include "API/api.h"
 #include "UI/mainwindow.h"
 #include "Tests/test.h"
+
 
 //#define RUN_TEST
 

@@ -27,11 +27,13 @@ SOURCES += \
         main.cpp \
     UI/mainwindow.cpp \
     API/api.cpp \
-    Tests/test.cpp
+    Tests/test.cpp \
+#    Logger/logger.cpp
 
 HEADERS += \
     UI/mainwindow.h \
     API/api.h \
+#    Logger/logger.h \
     Tests/test.h
 
 

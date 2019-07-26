@@ -19,6 +19,7 @@ public:
 
 public slots:
     void update_logs();
+    void update_logs(QString logs);
 
 private slots:
 
@@ -32,6 +33,8 @@ private slots:
     void on_program_clicked();
 
     void on_button_readback_clicked();
+
+    void on_show_logs_textChanged();
 
 private:
     Ui::MainWindow *ui;

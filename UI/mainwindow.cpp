@@ -11,8 +11,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     api = new API;
+    QString ids, nrf_path;
+    api->nrfjprog_ids(ids);
+    nrf_path = api->get_nrf_path();
+    ui->show_logs->setText("已连接调试器:"+ids+"\nnrfjprog路径:"+nrf_path+"\n");
+
     QObject::connect(api, SIGNAL(logs_is_ready()), this, SLOT(update_logs()));
+
+
 
 }
 
@@ -33,6 +41,12 @@ void MainWindow::update_logs()
 }
 
 
+void MainWindow::update_logs(QString logs)
+{
+    ui->show_logs->append(logs);
+}
+
+
 
 void MainWindow::on_button_open_file_clicked()
 {
@@ -45,7 +59,7 @@ void MainWindow::on_button_open_file_clicked()
 
 void MainWindow::on_button_disable_rbp_clicked()
 {
-    qDebug()<<"into on_button_disable_rbp_clicked() ";
+//    qDebug()<<"into on_button_disable_rbp_clicked() ";
 
     api->nrfjprog_recover();
 }
@@ -53,13 +67,13 @@ void MainWindow::on_button_disable_rbp_clicked()
 
 void MainWindow::on_eraseall_clicked()
 {
-    qDebug()<<"into on_eraseall_clicked() ";
+//    qDebug()<<"into on_eraseall_clicked() ";
     api->nrfjprog_eraseall();
 }
 
 void MainWindow::on_program_clicked()
 {
-    qDebug()<<"into on_program_clicked ";
+//    qDebug()<<"into on_program_clicked ";
     bool verify;
     bool reset;
     verify = ui->is_verify->isChecked();
@@ -89,4 +103,9 @@ void MainWindow::on_button_readback_clicked()
 
     api->nrfjprog_readcode(save_path, include_icr, include_ram, include_qspi);
 
+}
+
+void MainWindow::on_show_logs_textChanged()
+{
+    ui->show_logs->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
 }

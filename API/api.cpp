@@ -1,4 +1,8 @@
+#include <QApplication>
+
+
 #include "api.h"
+
 
 
 /**
@@ -8,6 +12,7 @@
  */
 API::API(QObject *parent) : QObject(parent)
 {
+    p = new QProcess(this);
     nrfjprog_path = find_nrf_path();
 
 }
@@ -296,6 +301,7 @@ int API::nrfjprog_readcode(QString path, bool readuicr,
 
 
 
+
 /**
  * @brief API::find_nrf_path
  * 调用 cmd 命令查找 nrfjprog 安装位置
@@ -326,21 +332,33 @@ QString API::find_nrf_path()
  */
 int API::run_command(QString cmd, QStringList arg)
 {
-    QProcess *p = new QProcess(0);
+//    QProcess *p = new QProcess(this);
     int ret;
+
+//    QObject::connect(p,SIGNAL(readyReadStandardOutput()), this, SLOT(update_info_logs()));
+
+//    QObject::connect(p,SIGNAL(readyReadStandardError()), this, SLOT(update_error_logs()));
+
     p->start(cmd, arg);
     if(!p->waitForStarted(-1))
         return -1;
-//    p->waitForReadyRead()
-    p->waitForFinished();
+//    p->waitForReadyRead();
+    while (!p->waitForFinished(3000)) {
+        QApplication::processEvents();
+    }
     ret = p->exitCode();
-    logs = QString::fromLocal8Bit(p->readAllStandardOutput());
+    if(ret == 0){
+        logs = QString::fromLocal8Bit(p->readAllStandardOutput());
+    }
+    else {
+        logs = QString::fromLocal8Bit(p->readAllStandardError());
+    }
+
     emit logs_is_ready();
     p->close();
     handle_error(ret);
     qDebug()<<"run_comm ret code:"<<cmd<<ret;
     return ret;
-
 }
 
 /**
@@ -350,7 +368,7 @@ int API::run_command(QString cmd, QStringList arg)
  */
 void API::handle_error(int error_no)
 {
-    QString title;
+    QString title = "未知错误";
     QString message;
 //    qDebug()<<NoLogWarning;
     switch (error_no) {
@@ -366,6 +384,23 @@ void API::handle_error(int error_no)
         title = "VerifyError";
         message = "The write verify operation failed.";
         break;
+    case UnavailableOperationBecauseProtectionError:
+        title = "UnavailableOperationBecauseProtectionError";
+        message = "The operation attempted cannot be performed because either the main-ap or the ctrl-ap is not available.";
+        break;
+    case NoWritePermissionError:
+        title = "NoWritePermissionError";
+        message = "Unable to create file in the current working directory.";
+        break;
+
+    case UnavailableOperationInFamilyError:
+        title = "UnavailableOperationInFamilyError";
+        message = "The operation attempted cannot be performed in the device because the feature is lacking in the device family.";
+        break;
+    case FileNotFoundError :
+        title = "FileNotFoundError";
+        message = "Unable to find the given file.";
+        break;
     default:
         break;
     }
@@ -373,5 +408,24 @@ void API::handle_error(int error_no)
     if(error_no != 0)
         QMessageBox::critical(0, title, message);
 }
+
+
+
+//void API::update_error_logs()
+//{
+
+//    logs = "1234";
+//    emit logs_is_ready();
+//}
+
+//void API::update_info_logs()
+//{
+
+//    logs ="tessssst"; //QString::fromLocal8Bit(p->readAllStandardError());
+//    emit logs_is_ready();
+
+//}
+
+
 
 
