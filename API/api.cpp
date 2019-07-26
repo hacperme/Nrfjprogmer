@@ -260,6 +260,7 @@ int API::nrfjprog_rbp(QString level, QString family)
 int API::nrfjprog_ids(QString &serial_id ,QString family)
 {
     int ret;
+
     QStringList args;
     QProcess pro;
     QString output;
@@ -340,6 +341,7 @@ QString API::find_nrf_path()
  */
 int API::run_command(QString cmd, QStringList arg)
 {
+
     int ret;
 
 #if 0
@@ -375,7 +377,6 @@ int API::run_command(QString cmd, QStringList arg)
 
     p->close();
     handle_error(ret);
-
     return ret;
 }
 
@@ -462,6 +463,4 @@ void API::update_error_logs()
 
 
 #endif
-
-
 

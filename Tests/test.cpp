@@ -6,7 +6,6 @@
 #include "../API/api.h"
 #include "test.h"
 
-
 static int test_count = 0;
 static int test_pass = 0;
 
@@ -44,7 +43,6 @@ static void test_api_recover(API &api){
 static void test_api_eraseall(API &api){
     EXPECT_EQ_INT(Success, api.nrfjprog_eraseall());
 }
-
 
 static void test_api_reset(API &api){
     EXPECT_EQ_INT(Success, api.nrfjprog_reset());
@@ -109,7 +107,6 @@ static void test_api(void){
     test_api_erasepage(api);
     test_api_eraseall(api);
     test_api_program(api);
-
     Sleep(3000);
 
     test_api_readcode(api);

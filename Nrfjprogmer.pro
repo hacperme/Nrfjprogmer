@@ -29,15 +29,12 @@ SOURCES += \
     API/api.cpp \
     Tests/test.cpp \
 #    Logger/logger.cpp
-    Logger/logger.cpp
 
 HEADERS += \
     UI/mainwindow.h \
     API/api.h \
 #    Logger/logger.h \
     Tests/test.h \
-    Logger/logger.h
-
 
 FORMS += \
     UI/mainwindow.ui
