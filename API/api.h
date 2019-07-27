@@ -9,7 +9,7 @@
 #include <QMessageBox>
 
 
-#define RUN_TEST
+//#define RUN_TEST
 
 typedef enum {
     Success = 0,
@@ -114,7 +114,8 @@ public:
 
 
 signals:
-    void logs_is_ready(void);
+    void error_logs_is_ready(void);
+    void info_logs_is_ready(void);
 
 public slots:
 

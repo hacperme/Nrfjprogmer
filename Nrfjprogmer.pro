@@ -41,7 +41,8 @@ FORMS += \
 
 DISTFILES += \
     Doc/design.md \
-    Tests/test_ALL.hex
+    Tests/test_ALL.hex \
+    .gitignore
 
 #INCLUDEPATH += Libs/include
 #LIBS += Libs/nrfjprog.dll

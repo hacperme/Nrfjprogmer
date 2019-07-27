@@ -440,12 +440,24 @@ void API::handle_error(int error_no)
 void API::update_info_logs()
 {
     QString temp;
+#if 0
+
     temp = QString::fromLocal8Bit(p->readAllStandardOutput());
     if(temp != ""){
         logs = temp;
-        emit logs_is_ready();
+        emit info_logs_is_ready();
+    }
+#else
+    p->setCurrentReadChannel(QProcess::StandardOutput);
+    while(p->canReadLine()){
+        temp = QString::fromLocal8Bit(p->readLine());
+        if(temp != ""){
+            logs = temp;
+            emit info_logs_is_ready();
+        }
     }
 
+#endif
 
 }
 
@@ -453,11 +465,24 @@ void API::update_info_logs()
 void API::update_error_logs()
 {
     QString temp;
+#if 0
     temp = QString::fromLocal8Bit(p->readAllStandardError());
     if(temp != ""){
         logs = temp;
-        emit logs_is_ready();
+        emit error_logs_is_ready();
     }
+
+#else
+    p->setCurrentReadChannel(QProcess::StandardError);
+    while(p->canReadLine()){
+        temp = QString::fromLocal8Bit(p->readLine());
+        if(temp != ""){
+            logs = temp;
+            emit error_logs_is_ready();
+        }
+    }
+
+#endif
 }
 
 

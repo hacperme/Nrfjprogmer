@@ -4,6 +4,8 @@
 #include <QFileDialog>
 #include <QObject>
 #include <QDebug>
+#include <QDateTime>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     api = new API;
-    QObject::connect(api, SIGNAL(logs_is_ready()), this, SLOT(update_logs()));
+    QObject::connect(api, SIGNAL(info_logs_is_ready()), this, SLOT(update_info_logs()));
+    QObject::connect(api, SIGNAL(error_logs_is_ready()), this, SLOT(update_error_logs()));
 }
 
 MainWindow::~MainWindow()
@@ -24,18 +27,28 @@ MainWindow::~MainWindow()
  * @brief MainWindow::update_logs
  * 更新操作日志信息文本框
  */
-void MainWindow::update_logs()
+void MainWindow::update_info_logs()
 {
+    QDateTime now = QDateTime::currentDateTime();
+    QString current_date_time = QString("[%1]").arg(now.toString("yyyy-MM-dd hh:mm:ss"));
 
-    ui->show_logs->append(api->logs);
-//    api->logs = "";
+    ui->show_logs->append(current_date_time+"INFO:"+api->logs);
+    //    api->logs = "";
+}
+
+void MainWindow::update_error_logs()
+{
+    QDateTime now = QDateTime::currentDateTime();
+    QString current_date_time = QString("[%1]").arg(now.toString("yyyy-MM-dd hh:mm:ss"));
+
+    ui->show_logs->append(current_date_time+api->logs);
 }
 
 
-void MainWindow::update_logs(QString logs)
-{
-    ui->show_logs->append(logs);
-}
+//void MainWindow::update_logs(QString logs)
+//{
+//    ui->show_logs->append(logs);
+//}
 
 
 
@@ -103,9 +116,40 @@ void MainWindow::on_show_logs_textChanged()
 
 void MainWindow::on_button_scan_clicked()
 {
+    QDateTime now;
+    QString current_date_time = QString("[%1]").arg(now.currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
     QString ids, nrf_path;
     api->nrfjprog_ids(ids);
+    ui->show_logs->append(current_date_time + "INFO:"+"调试器:"+ids);
+
     nrf_path = api->get_nrf_path();
-    ui->show_logs->append("调试器:"+ids+"nrfjprog路径:"+nrf_path+"\n");
+    current_date_time = QString("[%1]").arg(now.currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
+    ui->show_logs->append(current_date_time+"INFO:"+"nrfjprog路径:"+nrf_path+"\n");
+
+}
+
+void MainWindow::on_button_clear_logs_clicked()
+{
+    ui->show_logs->clear();
+}
+
+void MainWindow::on_button_save_logs_clicked()
+{
+    QString save_path = QFileDialog::getSaveFileName(this,tr("保存记录"), ".",
+                                             tr("Text files (*.log *.txt)"));
+    if(save_path != ""){
+        QFile file(save_path);
+        file.open(QIODevice::WriteOnly | QIODevice::Append);
+        QTextStream text_stream(&file);
+        text_stream <<ui->show_logs->toPlainText();
+        file.flush();
+        file.close();
+    }
+    else {
+
+        QMessageBox::warning(this, QString("警告"), QString("保存路径不能为空，记录未保存到文件！"));
+
+    }
+
 
 }
