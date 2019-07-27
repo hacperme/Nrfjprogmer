@@ -1,0 +1,6 @@
+<map id="API::nrfjprog_memwr" name="API::nrfjprog_memwr">
+<area shape="rect" id="node1" title="API::nrfjprog_memwr Writes to the provided address in memory with help of the NVM Controller or,..." alt="" coords="399,5,541,32"/>
+<area shape="rect" id="node2" href="$test_8cpp.html#a41f19b35782910c27489ded5c8ac74dd" title=" " alt="" coords="233,5,351,32"/>
+<area shape="rect" id="node3" href="$test_8cpp.html#a8b3ca02f2a8358f236669e91baf3b408" title=" " alt="" coords="117,5,185,32"/>
+<area shape="rect" id="node4" href="$test_8h.html#add1fe75ad79de762a3906b6d41897ff2" title=" " alt="" coords="5,5,69,32"/>
+</map>

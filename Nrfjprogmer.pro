@@ -41,8 +41,9 @@ FORMS += \
 
 DISTFILES += \
     Doc/design.md \
-    Tests/test_ALL.hex \
-    .gitignore
+    .gitignore \
+    README.md \
+    Doxyfile
 
 #INCLUDEPATH += Libs/include
 #LIBS += Libs/nrfjprog.dll

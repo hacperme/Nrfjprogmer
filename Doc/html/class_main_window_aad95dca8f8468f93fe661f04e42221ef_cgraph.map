@@ -1,0 +1,8 @@
+<map id="MainWindow::on_button_readback_clicked" name="MainWindow::on_button_readback_clicked">
+<area shape="rect" id="node1" title=" " alt="" coords="5,49,167,90"/>
+<area shape="rect" id="node2" href="$class_a_p_i.html#ae84704f7b2d4bea116893cc3bd087f02" title="API::nrfjprog_readcode Reads the device flash and stores it in the given file path." alt="" coords="215,56,368,83"/>
+<area shape="rect" id="node3" href="$class_a_p_i.html#aa3a31dc3d94f4a7dbe30b578e946e063" title="API::run_command 创建新进程 执行 程序" alt="" coords="416,56,549,83"/>
+<area shape="rect" id="node4" href="$class_a_p_i.html#a27bbd79867ef0c01c9e29b6ebb293014" title=" " alt="" coords="601,5,749,32"/>
+<area shape="rect" id="node5" href="$class_a_p_i.html#a70b16d0066d38fca6d5cb3ad74ff4e11" title=" " alt="" coords="597,56,752,83"/>
+<area shape="rect" id="node6" href="$class_a_p_i.html#a474699b50370b27d57863f894c38ce56" title="API::handle_error 处理 nrfjprog 运行的错误" alt="" coords="613,107,736,133"/>
+</map>
