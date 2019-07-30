@@ -7,6 +7,14 @@
 #include <QProcess>
 #include <QDebug>
 #include <QMessageBox>
+#include <Qmap>
+
+
+
+//#define RUN_TEST      // 定义该宏 则运行 单元测试
+
+
+
 
 
 typedef enum {
@@ -76,6 +84,9 @@ public:
 
     QString logs;
 
+    QMap <QString, QString> ak_param;
+    QMap <QString, QString> bf_param;
+
     void nrfjprog_set_path(QString path);
     QString get_nrf_path(void);
 
@@ -106,13 +117,15 @@ public:
 
     int nrfjprog_readcode(QString path, bool readuicr=false, bool readram=false,
                           bool readqspi=false, QString family="UNKNOWN");
+    int nrfjprog_write_page(QMap <QString, QString> addrmap);
 
 
 
 
 
 signals:
-    void logs_is_ready(void);
+    void error_logs_is_ready(void);
+    void info_logs_is_ready(void);
 
 public slots:
 
@@ -125,10 +138,14 @@ private:
     void handle_error(int error_no);
     QProcess *p;
 
-private slots:
-//    void update_error_logs();
-//    void update_info_logs();
 
+
+private slots:
+
+#if 1
+    void update_error_logs();
+    void update_info_logs();
+#endif
 
 };
 

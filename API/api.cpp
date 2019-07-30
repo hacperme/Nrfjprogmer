@@ -1,6 +1,5 @@
 #include <QApplication>
 
-
 #include "api.h"
 
 
@@ -14,6 +13,11 @@ API::API(QObject *parent) : QObject(parent)
 {
     p = new QProcess(this);
     nrfjprog_path = find_nrf_path();
+
+    for(int index = 0x0002e100;index < 0x0002E1FF; index += 4){
+        ak_param["0x000" + QString::number(index, 16)] = "0x00000000";
+        bf_param["0x000" + QString::number(index+0x00001000, 16)] = "0x00000000";
+    }
 
 }
 
@@ -226,7 +230,7 @@ int API::nrfjprog_erasepage(QString addr_start, QString addr_end, QString family
     QStringList args;
     args << "--erasepage" << addr_start + "-" + addr_end << "-f" << family;
     ret = run_command(nrfjprog_path, args);
-//    qDebug()<<output<<ret;
+    qDebug()<<args;
     return ret;
 }
 
@@ -260,12 +264,21 @@ int API::nrfjprog_rbp(QString level, QString family)
 int API::nrfjprog_ids(QString &serial_id ,QString family)
 {
     int ret;
-//    QString output;
+
     QStringList args;
+    QProcess pro;
+    QString output;
     args << "--ids" << "-f" << family;
-    ret = run_command(nrfjprog_path, args);
-    serial_id =logs;
-//    qDebug()<<serial_id<<ret;
+    pro.start(nrfjprog_path, args);
+    pro.waitForFinished(-1);
+    ret = pro.exitCode();
+//    if(ret == 0)
+    output = pro.readAllStandardOutput();
+    if(output == "")
+        serial_id = "设备未连接\n";
+    else
+        serial_id = output;
+    handle_error(ret);
     return ret;
 }
 
@@ -296,6 +309,25 @@ int API::nrfjprog_readcode(QString path, bool readuicr,
 
     ret = run_command(nrfjprog_path, args);
 //    qDebug()<<logs<<ret;
+    return ret;
+}
+
+int API::nrfjprog_write_page(QMap<QString, QString> addrmap)
+{
+
+
+    int ret = 0;
+    QMapIterator<QString, QString> i(addrmap);
+
+
+    while (i.hasNext()) {
+        i.next();
+        qDebug() << i.key() << ": " << i.value() << endl;
+
+        ret = nrfjprog_memwr(i.key(), i.value());
+        if(ret != 0)
+            return ret;
+    }
     return ret;
 }
 
@@ -332,21 +364,10 @@ QString API::find_nrf_path()
  */
 int API::run_command(QString cmd, QStringList arg)
 {
-//    QProcess *p = new QProcess(this);
+
     int ret;
 
-//    QObject::connect(p,SIGNAL(readyReadStandardOutput()), this, SLOT(update_info_logs()));
-
-//    QObject::connect(p,SIGNAL(readyReadStandardError()), this, SLOT(update_error_logs()));
-
-    p->start(cmd, arg);
-    if(!p->waitForStarted(-1))
-        return -1;
-//    p->waitForReadyRead();
-    while (!p->waitForFinished(3000)) {
-        QApplication::processEvents();
-    }
-    ret = p->exitCode();
+#if 0
     if(ret == 0){
         logs = QString::fromLocal8Bit(p->readAllStandardOutput());
     }
@@ -355,9 +376,31 @@ int API::run_command(QString cmd, QStringList arg)
     }
 
     emit logs_is_ready();
+#endif
+
+
+#ifdef RUN_TEST
+    p->start(cmd, arg);
+    p->waitForFinished();
+    ret = p->exitCode();
+    logs = QString::fromLocal8Bit(p->readAll());
+    qDebug()<<"run_comm ret code:"<<cmd<<ret<<logs;
+#else
+    QObject::connect(p,SIGNAL(readyReadStandardOutput()), this, SLOT(update_info_logs()));
+
+    QObject::connect(p,SIGNAL(readyReadStandardError()), this, SLOT(update_error_logs()));
+
+    p->start(cmd, arg);
+    while (!p->waitForFinished(3000)) {     // 调用 waitForFinished（） 函数 会阻塞主线程，
+                                            //等待时间过长会导致 GUI 界面停止响应
+        QApplication::processEvents();
+    }
+    ret = p->exitCode();
+
+#endif
+
     p->close();
     handle_error(ret);
-    qDebug()<<"run_comm ret code:"<<cmd<<ret;
     return ret;
 }
 
@@ -369,7 +412,7 @@ int API::run_command(QString cmd, QStringList arg)
 void API::handle_error(int error_no)
 {
     QString title = "未知错误";
-    QString message;
+    QString message = "未知错误:";
 //    qDebug()<<NoLogWarning;
     switch (error_no) {
     case NoDebuggersError:
@@ -401,31 +444,83 @@ void API::handle_error(int error_no)
         title = "FileNotFoundError";
         message = "Unable to find the given file.";
         break;
+    case FlashNotErasedError :
+        title = "FlashNotErasedError";
+        message = "A program operation failed because the area to write was not erased.";
+        break;
+    case NrfjprogError :
+        title = "NrfjprogError";
+        message = "An error condition that should not occur has happened.";
+        break;
     default:
         break;
     }
 
-    if(error_no != 0)
+#ifndef RUN_TEST
+
+    if(error_no != 0){
         QMessageBox::critical(0, title, message);
+        qDebug()<<error_no;
+    }
+
+
+#endif
+
 }
 
 
 
-//void API::update_error_logs()
-//{
 
-//    logs = "1234";
-//    emit logs_is_ready();
-//}
+#if 1
+void API::update_info_logs()
+{
+    QString temp;
+#if 0
 
-//void API::update_info_logs()
-//{
+    temp = QString::fromLocal8Bit(p->readAllStandardOutput());
+    if(temp != ""){
+        logs = temp;
+        emit info_logs_is_ready();
+    }
+#else
+    p->setCurrentReadChannel(QProcess::StandardOutput);
+    while(p->canReadLine()){
+        temp = QString::fromLocal8Bit(p->readLine());
+        if(temp != ""){
+            logs = temp;
+            emit info_logs_is_ready();
+        }
+    }
 
-//    logs ="tessssst"; //QString::fromLocal8Bit(p->readAllStandardError());
-//    emit logs_is_ready();
+#endif
 
-//}
-
+}
 
 
+void API::update_error_logs()
+{
+    QString temp;
+#if 0
+    temp = QString::fromLocal8Bit(p->readAllStandardError());
+    if(temp != ""){
+        logs = temp;
+        emit error_logs_is_ready();
+    }
+
+#else
+    p->setCurrentReadChannel(QProcess::StandardError);
+    while(p->canReadLine()){
+        temp = QString::fromLocal8Bit(p->readLine());
+        if(temp != ""){
+            logs = temp;
+            emit error_logs_is_ready();
+        }
+    }
+
+#endif
+}
+
+
+
+#endif
 

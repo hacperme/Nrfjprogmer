@@ -22,6 +22,19 @@
 
 - 发布 打包
 
+    1. QT 的程序打包发布，可以使用官方提供的 windeployqt 工具提取 动态库
+    
+       ```bat
+        Usage: windeployqt [options] [files]
+        
+        windeployqt <path-to-app-binary>
+        # for Qt Quick, run:
+        windeployqt --qmldir <path-to-app-qml-files> <path-to-app-binary>
+       ```
+
+
+
+
 ## nrfjprog 命令行 操作 指令
 
 - 安装路径：

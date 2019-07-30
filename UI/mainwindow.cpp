@@ -4,6 +4,9 @@
 #include <QFileDialog>
 #include <QObject>
 #include <QDebug>
+#include <QDateTime>
+#include <QMessageBox>
+#include <windows.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,17 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
     api = new API;
-    QString ids, nrf_path;
-    api->nrfjprog_ids(ids);
-    nrf_path = api->get_nrf_path();
-    ui->show_logs->setText("已连接调试器:"+ids+"\nnrfjprog路径:"+nrf_path+"\n");
-
-    QObject::connect(api, SIGNAL(logs_is_ready()), this, SLOT(update_logs()));
-
-
-
+    QObject::connect(api, SIGNAL(info_logs_is_ready()), this, SLOT(update_info_logs()));
+    QObject::connect(api, SIGNAL(error_logs_is_ready()), this, SLOT(update_error_logs()));
 }
 
 MainWindow::~MainWindow()
@@ -33,18 +28,28 @@ MainWindow::~MainWindow()
  * @brief MainWindow::update_logs
  * 更新操作日志信息文本框
  */
-void MainWindow::update_logs()
+void MainWindow::update_info_logs()
 {
-//    ui->show_logs->setText(api->logs);
-    ui->show_logs->append(api->logs);
-    api->logs = "";
+    QDateTime now = QDateTime::currentDateTime();
+    QString current_date_time = QString("[%1]").arg(now.toString("yyyy-MM-dd hh:mm:ss"));
+
+    ui->show_logs->append(current_date_time+"INFO:"+api->logs);
+    //    api->logs = "";
+}
+
+void MainWindow::update_error_logs()
+{
+    QDateTime now = QDateTime::currentDateTime();
+    QString current_date_time = QString("[%1]").arg(now.toString("yyyy-MM-dd hh:mm:ss"));
+
+    ui->show_logs->append(current_date_time+api->logs);
 }
 
 
-void MainWindow::update_logs(QString logs)
-{
-    ui->show_logs->append(logs);
-}
+//void MainWindow::update_logs(QString logs)
+//{
+//    ui->show_logs->append(logs);
+//}
 
 
 
@@ -80,9 +85,10 @@ void MainWindow::on_program_clicked()
     reset = ui->is_reset->isChecked();
     api->nrfjprog_recover();
     api->nrfjprog_program(hex_path, verify, reset);
-    if(ui->is_rbp->isChecked())
-        //这里可能需要延时，等待固件烧写完成再操作。
+    if(ui->is_rbp->isChecked()){
+        Sleep(500);            //这里可能需要延时，等待 MCU 复位完成，再进行 rbp 操作。
         api->nrfjprog_rbp();
+    }
 }
 
 
@@ -108,4 +114,44 @@ void MainWindow::on_button_readback_clicked()
 void MainWindow::on_show_logs_textChanged()
 {
     ui->show_logs->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+}
+
+void MainWindow::on_button_scan_clicked()
+{
+    QDateTime now;
+    QString current_date_time = QString("[%1]").arg(now.currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
+    QString ids, nrf_path;
+    api->nrfjprog_ids(ids);
+    ui->show_logs->append(current_date_time + "INFO:"+"调试器:"+ids);
+
+    nrf_path = api->get_nrf_path();
+    current_date_time = QString("[%1]").arg(now.currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
+    ui->show_logs->append(current_date_time+"INFO:"+"nrfjprog路径:"+nrf_path+"\n");
+
+}
+
+void MainWindow::on_button_clear_logs_clicked()
+{
+    ui->show_logs->clear();
+}
+
+void MainWindow::on_button_save_logs_clicked()
+{
+    QString save_path = QFileDialog::getSaveFileName(this,tr("保存记录"), ".",
+                                             tr("Text files (*.log *.txt)"));
+    if(save_path != ""){
+        QFile file(save_path);
+        file.open(QIODevice::WriteOnly | QIODevice::Append);
+        QTextStream text_stream(&file);
+        text_stream <<ui->show_logs->toPlainText();
+        file.flush();
+        file.close();
+    }
+    else {
+
+        QMessageBox::warning(this, QString("警告"), QString("保存路径不能为空，记录未保存到文件！"));
+
+    }
+
+
 }
