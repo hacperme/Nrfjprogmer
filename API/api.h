@@ -14,11 +14,6 @@
 //#define RUN_TEST      // 定义该宏 则运行 单元测试
 
 
-
-
-
-//#define RUN_TEST
-
 typedef enum {
     Success = 0,
     NrfjprogError = 1,
@@ -74,6 +69,16 @@ typedef enum {
     VeryLongOperationWarning = 104,
     CanNotExecNrfjprog = -1     ///自定义返回值，不能执行程序Nrfjprog
 }ErrorCode;
+
+
+typedef struct _HexType{
+    QString head = ":";
+    uint8_t length;
+    uint16_t addr;
+    uint8_t type;
+    uint8_t data[32];
+    uint8_t checksum;
+}HexType;
 
 
 
