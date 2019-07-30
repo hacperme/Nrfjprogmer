@@ -38,6 +38,7 @@ HEADERS += \
     Tests/test.h \
     Crc/crc.h
 
+
 FORMS += \
     UI/mainwindow.ui
 

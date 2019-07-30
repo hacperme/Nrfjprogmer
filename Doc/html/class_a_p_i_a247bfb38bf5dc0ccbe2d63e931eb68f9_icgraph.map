@@ -1,0 +1,6 @@
+<map id="API::nrfjprog_erasepage" name="API::nrfjprog_erasepage">
+<area shape="rect" id="node1" title="API::nrfjprog_erasepage Erases the flash pages starting at the given start address and ending at the ..." alt="" coords="416,5,576,32"/>
+<area shape="rect" id="node2" href="$test_8cpp.html#a0c1898e417b57c0f026dca25e093e9cf" title=" " alt="" coords="233,5,368,32"/>
+<area shape="rect" id="node3" href="$test_8cpp.html#a8b3ca02f2a8358f236669e91baf3b408" title=" " alt="" coords="117,5,185,32"/>
+<area shape="rect" id="node4" href="$test_8h.html#add1fe75ad79de762a3906b6d41897ff2" title=" " alt="" coords="5,5,69,32"/>
+</map>

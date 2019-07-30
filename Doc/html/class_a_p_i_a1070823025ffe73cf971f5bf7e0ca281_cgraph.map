@@ -1,0 +1,7 @@
+<map id="API::nrfjprog_eraseuicr" name="API::nrfjprog_eraseuicr">
+<area shape="rect" id="node1" title="API::nrfjprog_eraseuicr Erases the UICR page." alt="" coords="5,56,159,83"/>
+<area shape="rect" id="node2" href="$class_a_p_i.html#aa3a31dc3d94f4a7dbe30b578e946e063" title="API::run_command 创建新进程 执行 程序" alt="" coords="207,56,340,83"/>
+<area shape="rect" id="node3" href="$class_a_p_i.html#a27bbd79867ef0c01c9e29b6ebb293014" title=" " alt="" coords="391,5,539,32"/>
+<area shape="rect" id="node4" href="$class_a_p_i.html#a70b16d0066d38fca6d5cb3ad74ff4e11" title=" " alt="" coords="388,56,543,83"/>
+<area shape="rect" id="node5" href="$class_a_p_i.html#a474699b50370b27d57863f894c38ce56" title="API::handle_error 处理 nrfjprog 运行的错误" alt="" coords="404,107,527,133"/>
+</map>

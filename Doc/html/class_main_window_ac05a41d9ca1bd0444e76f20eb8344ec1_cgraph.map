@@ -1,0 +1,8 @@
+<map id="MainWindow::on_eraseall_clicked" name="MainWindow::on_eraseall_clicked">
+<area shape="rect" id="node1" title=" " alt="" coords="5,49,176,90"/>
+<area shape="rect" id="node2" href="$class_a_p_i.html#ac5e9ab1c5ea7f18fcbb05c955e06e26f" title="API::nrfjprog_eraseall Erases all user available program flash memory and the UICR page." alt="" coords="224,56,369,83"/>
+<area shape="rect" id="node3" href="$class_a_p_i.html#aa3a31dc3d94f4a7dbe30b578e946e063" title="API::run_command 创建新进程 执行 程序" alt="" coords="417,56,551,83"/>
+<area shape="rect" id="node4" href="$class_a_p_i.html#a27bbd79867ef0c01c9e29b6ebb293014" title=" " alt="" coords="602,5,750,32"/>
+<area shape="rect" id="node5" href="$class_a_p_i.html#a70b16d0066d38fca6d5cb3ad74ff4e11" title=" " alt="" coords="599,56,753,83"/>
+<area shape="rect" id="node6" href="$class_a_p_i.html#a474699b50370b27d57863f894c38ce56" title="API::handle_error 处理 nrfjprog 运行的错误" alt="" coords="615,107,737,133"/>
+</map>

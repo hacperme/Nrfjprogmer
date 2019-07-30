@@ -1,0 +1,6 @@
+<map id="API::nrfjprog_reset" name="API::nrfjprog_reset">
+<area shape="rect" id="node1" title="API::nrfjprog_reset Performs a soft reset by setting the SysResetReq bit of the AIRCR register of the..." alt="" coords="385,5,515,32"/>
+<area shape="rect" id="node2" href="$test_8cpp.html#af0a9b5dc138aec33a195ffc2e375bd77" title=" " alt="" coords="233,5,337,32"/>
+<area shape="rect" id="node3" href="$test_8cpp.html#a8b3ca02f2a8358f236669e91baf3b408" title=" " alt="" coords="117,5,185,32"/>
+<area shape="rect" id="node4" href="$test_8h.html#add1fe75ad79de762a3906b6d41897ff2" title=" " alt="" coords="5,5,69,32"/>
+</map>

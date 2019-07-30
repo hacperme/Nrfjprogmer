@@ -17,6 +17,8 @@
 
 
 
+//#define RUN_TEST
+
 typedef enum {
     Success = 0,
     NrfjprogError = 1,

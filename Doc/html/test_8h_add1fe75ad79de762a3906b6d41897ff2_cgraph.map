@@ -1,0 +1,32 @@
+<map id="test_all" name="test_all">
+<area shape="rect" id="node1" title=" " alt="" coords="5,284,69,311"/>
+<area shape="rect" id="node2" href="$test_8cpp.html#a8b3ca02f2a8358f236669e91baf3b408" title=" " alt="" coords="117,284,185,311"/>
+<area shape="rect" id="node3" href="$test_8cpp.html#a2b09b7ed15a0fee38247fdefc25040f6" title=" " alt="" coords="241,5,360,32"/>
+<area shape="rect" id="node7" href="$test_8cpp.html#a5b0f2b6e3b1b049cde480f6bd592e07c" title=" " alt="" coords="243,157,359,184"/>
+<area shape="rect" id="node12" href="$test_8cpp.html#af0a9b5dc138aec33a195ffc2e375bd77" title=" " alt="" coords="249,259,353,285"/>
+<area shape="rect" id="node14" href="$test_8cpp.html#a41f19b35782910c27489ded5c8ac74dd" title=" " alt="" coords="242,208,359,235"/>
+<area shape="rect" id="node16" href="$test_8cpp.html#a7a9e477f9bbdbfc16308dc08867bcde1" title=" " alt="" coords="243,309,358,336"/>
+<area shape="rect" id="node18" href="$test_8cpp.html#af80a0fd78ce59c75bd5442e7ec35efe2" title=" " alt="" coords="237,461,365,488"/>
+<area shape="rect" id="node20" href="$test_8cpp.html#a0c1898e417b57c0f026dca25e093e9cf" title=" " alt="" coords="233,512,368,539"/>
+<area shape="rect" id="node22" href="$test_8cpp.html#add6afb8ca9440282c398cb4bcade1bbb" title=" " alt="" coords="241,411,361,437"/>
+<area shape="rect" id="node24" href="$test_8cpp.html#a8904d8f3737f8278099a0a1fcd92ea98" title=" " alt="" coords="239,563,362,589"/>
+<area shape="rect" id="node26" href="$test_8cpp.html#a04240439089a1462d98eb432937d6055" title=" " alt="" coords="237,107,365,133"/>
+<area shape="rect" id="node28" href="$test_8cpp.html#af128b0bbac49d3497f96a32b255c37de" title=" " alt="" coords="254,360,347,387"/>
+<area shape="rect" id="node30" href="$test_8cpp.html#a28de4fed07ce85c942b33e55993cf17b" title=" " alt="" coords="255,56,347,83"/>
+<area shape="rect" id="node4" href="$class_a_p_i.html#aac907535efdc3c2b4bb1102d366b2ea1" title="API::nrfjprog_set_path 设置 nrfjprog 程序的绝对路径" alt="" coords="421,5,571,32"/>
+<area shape="rect" id="node5" href="$class_a_p_i.html#ad239d64fde9bf9ccf9ed3307ac0712f0" title="API::nrfjprog_ids Displays the serial numbers of all the debuggers connected to the computer." alt="" coords="437,56,555,83"/>
+<area shape="rect" id="node6" href="$class_a_p_i.html#a474699b50370b27d57863f894c38ce56" title="API::handle_error 处理 nrfjprog 运行的错误" alt="" coords="821,183,944,209"/>
+<area shape="rect" id="node8" href="$class_a_p_i.html#abf47651c6b917b2b48dcc01bdab289b9" title="API::nrfjprog_recover Erases all user flash memory and disables the readback protection mechanism if ..." alt="" coords="425,157,567,184"/>
+<area shape="rect" id="node9" href="$class_a_p_i.html#aa3a31dc3d94f4a7dbe30b578e946e063" title="API::run_command 创建新进程 执行 程序" alt="" coords="624,309,757,336"/>
+<area shape="rect" id="node10" href="$class_a_p_i.html#a27bbd79867ef0c01c9e29b6ebb293014" title=" " alt="" coords="809,335,957,361"/>
+<area shape="rect" id="node11" href="$class_a_p_i.html#a70b16d0066d38fca6d5cb3ad74ff4e11" title=" " alt="" coords="805,284,960,311"/>
+<area shape="rect" id="node13" href="$class_a_p_i.html#a767c12af1e9952f18593f319e8aad691" title="API::nrfjprog_reset Performs a soft reset by setting the SysResetReq bit of the AIRCR register of the..." alt="" coords="431,259,561,285"/>
+<area shape="rect" id="node15" href="$class_a_p_i.html#a2bc55a6035fbd8dd03a97cacab63c101" title="API::nrfjprog_memwr Writes to the provided address in memory with help of the NVM Controller or,..." alt="" coords="425,208,567,235"/>
+<area shape="rect" id="node17" href="$class_a_p_i.html#a58f3eab95763686a220892129399dff5" title="API::nrfjprog_memrd Reads n bytes from the provided address. If width is not given,..." alt="" coords="426,309,566,336"/>
+<area shape="rect" id="node19" href="$class_a_p_i.html#a1070823025ffe73cf971f5bf7e0ca281" title="API::nrfjprog_eraseuicr Erases the UICR page." alt="" coords="419,461,573,488"/>
+<area shape="rect" id="node21" href="$class_a_p_i.html#a247bfb38bf5dc0ccbe2d63e931eb68f9" title="API::nrfjprog_erasepage Erases the flash pages starting at the given start address and ending at the ..." alt="" coords="416,512,576,539"/>
+<area shape="rect" id="node23" href="$class_a_p_i.html#ac5e9ab1c5ea7f18fcbb05c955e06e26f" title="API::nrfjprog_eraseall Erases all user available program flash memory and the UICR page." alt="" coords="423,411,569,437"/>
+<area shape="rect" id="node25" href="$class_a_p_i.html#a3387e0691dd41568db455cf92703be16" title="API::nrfjprog_program" alt="" coords="423,563,569,589"/>
+<area shape="rect" id="node27" href="$class_a_p_i.html#ae84704f7b2d4bea116893cc3bd087f02" title="API::nrfjprog_readcode Reads the device flash and stores it in the given file path." alt="" coords="419,107,573,133"/>
+<area shape="rect" id="node29" href="$class_a_p_i.html#a79ce66659369f5a2195c57f7df14bea6" title="API::nrfjprog_rbp Enables the readback protection mechanism. Valid argument options are CR0 and ALL." alt="" coords="437,360,555,387"/>
+</map>

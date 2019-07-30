@@ -391,8 +391,10 @@ int API::run_command(QString cmd, QStringList arg)
     QObject::connect(p,SIGNAL(readyReadStandardError()), this, SLOT(update_error_logs()));
 
     p->start(cmd, arg);
+
     while (!p->waitForFinished(3000)) {     // 调用 waitForFinished（） 函数 会阻塞主线程，
                                             //等待时间过长会导致 GUI 界面停止响应
+
         QApplication::processEvents();
     }
     ret = p->exitCode();
@@ -458,10 +460,12 @@ void API::handle_error(int error_no)
 
 #ifndef RUN_TEST
 
+
     if(error_no != 0){
         QMessageBox::critical(0, title, message);
         qDebug()<<error_no;
     }
+
 
 
 #endif

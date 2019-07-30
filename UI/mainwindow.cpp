@@ -6,7 +6,9 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QMessageBox>
+
 #include <windows.h>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

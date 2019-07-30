@@ -1,0 +1,9 @@
+<map id="API::nrfjprog_recover" name="API::nrfjprog_recover">
+<area shape="rect" id="node1" title="API::nrfjprog_recover Erases all user flash memory and disables the readback protection mechanism if ..." alt="" coords="453,85,595,112"/>
+<area shape="rect" id="node2" href="$test_8cpp.html#a5b0f2b6e3b1b049cde480f6bd592e07c" title=" " alt="" coords="261,5,377,32"/>
+<area shape="rect" id="node5" href="$test_8cpp.html#a41f19b35782910c27489ded5c8ac74dd" title=" " alt="" coords="261,56,378,83"/>
+<area shape="rect" id="node6" href="$class_main_window.html#a407e696a12050ba5ecee8527ef28750a" title=" " alt="" coords="239,107,400,149"/>
+<area shape="rect" id="node7" href="$class_main_window.html#a8792d09d05ef8975c6328ad5548be4b5" title=" " alt="" coords="233,173,405,214"/>
+<area shape="rect" id="node3" href="$test_8cpp.html#a8b3ca02f2a8358f236669e91baf3b408" title=" " alt="" coords="117,31,185,57"/>
+<area shape="rect" id="node4" href="$test_8h.html#add1fe75ad79de762a3906b6d41897ff2" title=" " alt="" coords="5,31,69,57"/>
+</map>

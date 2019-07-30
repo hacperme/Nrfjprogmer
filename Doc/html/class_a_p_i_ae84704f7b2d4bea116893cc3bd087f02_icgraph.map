@@ -1,0 +1,7 @@
+<map id="API::nrfjprog_readcode" name="API::nrfjprog_readcode">
+<area shape="rect" id="node1" title="API::nrfjprog_readcode Reads the device flash and stores it in the given file path." alt="" coords="443,35,596,61"/>
+<area shape="rect" id="node2" href="$test_8cpp.html#a04240439089a1462d98eb432937d6055" title=" " alt="" coords="250,5,378,32"/>
+<area shape="rect" id="node5" href="$class_main_window.html#aad95dca8f8468f93fe661f04e42221ef" title=" " alt="" coords="233,57,395,98"/>
+<area shape="rect" id="node3" href="$test_8cpp.html#a8b3ca02f2a8358f236669e91baf3b408" title=" " alt="" coords="117,5,185,32"/>
+<area shape="rect" id="node4" href="$test_8h.html#add1fe75ad79de762a3906b6d41897ff2" title=" " alt="" coords="5,5,69,32"/>
+</map>

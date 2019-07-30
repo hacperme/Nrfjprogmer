@@ -1,0 +1,6 @@
+<map id="MainWindow::on_button_scan_clicked" name="MainWindow::on_button_scan_clicked">
+<area shape="rect" id="node1" title=" " alt="" coords="5,23,167,65"/>
+<area shape="rect" id="node2" href="$class_a_p_i.html#ad239d64fde9bf9ccf9ed3307ac0712f0" title="API::nrfjprog_ids Displays the serial numbers of all the debuggers connected to the computer." alt="" coords="217,5,335,32"/>
+<area shape="rect" id="node4" href="$class_a_p_i.html#a3044b0e78873d1e070c1eb5263ea4f42" title="API::get_nrf_path 读取当前 nrfjprog 程序的绝对路径" alt="" coords="215,56,337,83"/>
+<area shape="rect" id="node3" href="$class_a_p_i.html#a474699b50370b27d57863f894c38ce56" title="API::handle_error 处理 nrfjprog 运行的错误" alt="" coords="385,5,508,32"/>
+</map>
